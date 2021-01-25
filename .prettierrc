@@ -1,0 +1,7 @@
+{
+  "singleQuote": true,
+  "proseWrap": "preserve",
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "semi": false
+}
