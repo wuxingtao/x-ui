@@ -3,20 +3,20 @@
  * @Author: wu xingtgao
  * @Date: 2021/1/25
  */
-import Button from "./button";
+import Button from './button'
 
 function install(app) {
-  const components = [Button];
+  const components = [Button]
   components.forEach(item => {
     if (item.install) {
-      app.use(item);
+      app.use(item)
     } else if (item.name) {
-      app.component(item.name, item);
+      app.component(item.name, item)
     }
-  });
+  })
 }
 
 export default {
   install: install,
-  version: "0.0.1"
-};
+  version: '0.0.1'
+}

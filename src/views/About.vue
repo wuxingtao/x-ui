@@ -1,7 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <p>{{ text }}</p>
+    <x-button>button按钮</x-button>
   </div>
 </template>
 <script>
