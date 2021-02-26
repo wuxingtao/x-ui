@@ -14,6 +14,8 @@ export default {
   input: path.resolve(__dirname, '../src/components/index.ts'),
   output: {
     format: 'es',
+    // name: 'xUi',
+    // format: 'umd',
     file: 'lib/index.esm.js'
   },
   plugins: [
@@ -33,7 +35,7 @@ export default {
     babel({
       babelHelpers: 'bundled',
       exclude: 'node_modules/**',
-      extensions: ['.js', '.jsx', '.ts', '.tsx']
+      extensions: ['vue', '.js', '.jsx', '.ts', '.tsx']
     })
   ]
 }
