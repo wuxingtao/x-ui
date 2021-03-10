@@ -45,5 +45,8 @@
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "~3.9.3",
     "vue-loader": "^16.1.2"
+  },
+  "engines": {
+    "node": ">=12.16.3"
   }
 }
