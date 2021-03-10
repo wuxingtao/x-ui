@@ -4,9 +4,10 @@
  * @Date: 2021/1/25
  */
 import Button from './button'
+import Input from './input'
 
 function install(app) {
-  const components = [Button]
+  const components = [Button, Input]
   components.forEach(item => {
     if (item.install) {
       app.use(item)
