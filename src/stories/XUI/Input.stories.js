@@ -1,7 +1,7 @@
-import XInput from '../components/input/index.tsx'
+import XInput from '@/components/input/index.tsx'
 
 export default {
-  title: 'Input',
+  title: 'XUI/Input',
   component: XInput,
   argTypes: {}
 }
