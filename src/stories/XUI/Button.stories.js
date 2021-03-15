@@ -1,5 +1,5 @@
-import { XButton } from '@/components/indexGroup'
-import '@/components/button/index.scss'
+import { XButton } from '@/packages/indexGroup'
+import '@/packages/button/index.scss'
 export default {
   title: 'XUI/Button',
   component: XButton,

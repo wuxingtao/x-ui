@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@/components/input/index.scss'
+import '@/packages/input/index.scss'
 
 export default {
   name: 'Input-test'

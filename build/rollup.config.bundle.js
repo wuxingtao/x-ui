@@ -11,7 +11,7 @@ import typescript from 'rollup-plugin-typescript2'
 import vue from 'rollup-plugin-vue'
 
 export default {
-  input: path.resolve(__dirname, '../src/components/index.ts'),
+  input: path.resolve(__dirname, '../src/packages/index.ts'),
   output: {
     format: 'es',
     // name: 'xUi',
@@ -27,7 +27,7 @@ export default {
     }),
     typescript({
       tsconfigOverride: {
-        // include: ['components/**/*', 'typings/vue-shim.d.ts'],
+        // include: ['packages/**/*', 'typings/vue-shim.d.ts'],
         // exclude: ['node_modules', 'packages/**/__tests__/*']
       },
       abortOnError: false

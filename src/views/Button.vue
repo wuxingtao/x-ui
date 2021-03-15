@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import '@/components/button/index.scss'
+import '@/packages/button/index.scss'
 export default {
   name: 'button-test'
 }
