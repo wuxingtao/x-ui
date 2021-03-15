@@ -8,3 +8,9 @@ Vue3+TS+rollup
 ## 组件按需加载
 
 使用babel-plugin-import 按需引入
+
+## 样式
+样式参考element-plus
+
+## 组件开发模式
+> BEM命名参考vant
