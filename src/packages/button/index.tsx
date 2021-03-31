@@ -9,7 +9,7 @@ import { createNamespace } from '@/utils/create'
 
 const [createComponent, bem] = createNamespace('button')
 
-export type ButtonSize = 'large' | 'normal' | 'small' | 'mini'
+export type ButtonSize = 'normal' | 'small' | 'mini'
 
 export type ButtonType =
   | 'default'
@@ -82,13 +82,13 @@ export default createComponent({
       if (props.loading) {
         event.preventDefault()
       }
-      if (!props.loading && props.disabled) {
+      if (!props.loading && !props.disabled) {
         emit('click', event)
       }
     }
     return () => {
       const { tag, type, size, disabled, nativeType } = props
-      const classes = [bem([type, size, {}])]
+      const classes = [bem([type, size, tag, {}])]
       return (
         <tag
           type={nativeType}
