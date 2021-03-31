@@ -14,3 +14,6 @@ Vue3+TS+rollup
 
 ## 组件开发模式
 > BEM命名参考vant
+
+> 1. vant setup(()=>{return ()=>{}}) 直接渲染
+> 2. element-plus 使用template渲染
