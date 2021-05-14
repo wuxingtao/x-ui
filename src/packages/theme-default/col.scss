@@ -1,5 +1,5 @@
-@import "../theme-default/common/var.scss";
-@import "../theme-default/mixins/mixins.scss";
+@import "./common/var.scss";
+@import "./mixins/mixins.scss";
 
 [class*='#{$namespace}-col-'] {
   float: left;
@@ -40,14 +40,14 @@
 }
 
 @include res(xs) {
-  .#{$namespace}-col-xs-0 {
+  .#{$namespace}-col--xs-0 {
     display: none;
     @include when(guttered) {
       display: none;
     }
   }
   @for $i from 0 through 24 {
-    .#{$namespace}-col-xs-#{$i} {
+    .#{$namespace}-col--xs-#{$i} {
       @if $i != 0 {
         display: block;
       }
@@ -55,16 +55,16 @@
       flex: 0 0 (1 / 24 * $i * 100) * 1%;
     }
 
-    .#{$namespace}-col-xs-offset-#{$i} {
+    .#{$namespace}-col--xs-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .#{$namespace}-col-xs-pull-#{$i} {
+    .#{$namespace}-col--xs-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .#{$namespace}-col-xs-push-#{$i} {
+    .#{$namespace}-col--xs-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }
@@ -72,14 +72,14 @@
 }
 
 @include res(sm) {
-  .#{$namespace}-col-sm-0 {
+  .#{$namespace}-col--sm-0 {
     display: none;
     @include when(guttered) {
       display: none;
     }
   }
   @for $i from 0 through 24 {
-    .#{$namespace}-col-sm-#{$i} {
+    .#{$namespace}-col--sm-#{$i} {
       @if $i != 0 {
         display: block;
       }
@@ -87,16 +87,16 @@
       flex: 0 0 (1 / 24 * $i * 100) * 1%;
     }
 
-    .#{$namespace}-col-sm-offset-#{$i} {
+    .#{$namespace}-col--sm-offset-#{$i} {
       margin-left: (1 / 24 * $i * 100) * 1%;
     }
 
-    .#{$namespace}-col-sm-pull-#{$i} {
+    .#{$namespace}-col--sm-pull-#{$i} {
       position: relative;
       right: (1 / 24 * $i * 100) * 1%;
     }
 
-    .#{$namespace}-col-sm-push-#{$i} {
+    .#{$namespace}-col--sm-push-#{$i} {
       position: relative;
       left: (1 / 24 * $i * 100) * 1%;
     }

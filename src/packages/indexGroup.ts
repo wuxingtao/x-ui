@@ -6,3 +6,5 @@
 
 export { default as XInput } from './input'
 export { default as XButton } from './button'
+export { default as XCol } from './col'
+export { default as XRow } from './row'
