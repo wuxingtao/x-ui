@@ -1,5 +1,5 @@
 import { computed, PropType, defineComponent } from 'vue'
-import { createNamespace } from '@/utils/create'
+import { createNamespace } from '@/utils/create/index_old'
 const [createComponent, bem] = createNamespace('row')
 export default createComponent({
   props: {

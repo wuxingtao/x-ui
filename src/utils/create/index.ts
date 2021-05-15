@@ -1,12 +1,12 @@
 /**
  * @Desc: index
- * @Author: wu xingtgao
- * @Date: 2021/1/25
+ * @Author: wu xingtao
+ * @Date: 2021/5/15
  */
-import { createComponent } from '@/utils/create/component'
 import { createBEM } from '@/utils/create/bem'
+// import { createTranslate } from './translate'
 
 export function createNamespace(name: string) {
-  name = 'x-' + name
-  return [createComponent(name), createBEM(name)] as const
+  const prefixedName = `x-${name}`
+  return [prefixedName, createBEM(prefixedName)] as const
 }

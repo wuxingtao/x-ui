@@ -3,11 +3,11 @@
  * @Author: wu xingtgao
  * @Date: 2021/1/19
  */
-import { PropType, CSSProperties } from 'vue'
+import { PropType, CSSProperties, defineComponent } from 'vue'
 // utils
 import { createNamespace } from '@/utils/create'
 
-const [createComponent, bem] = createNamespace('button')
+const [name, bem] = createNamespace('button')
 
 export type ButtonSize = 'normal' | 'small' | 'mini'
 
@@ -18,14 +18,16 @@ export type ButtonType =
   | 'warning'
   | 'danger'
 
-export default createComponent({
+export default defineComponent({
   // name: 'XButton', name在createNamespace 实现
+  name,
   props: {
     text: String,
     icon: String,
     color: String,
     loading: Boolean,
     disabled: Boolean,
+    loadingText: String,
     tag: {
       type: String as PropType<keyof HTMLElementTagNameMap>,
       default: 'button'

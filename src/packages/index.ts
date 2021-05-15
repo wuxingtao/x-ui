@@ -3,11 +3,13 @@
  * @Author: wu xingtgao
  * @Date: 2021/1/25
  */
-import Button from './button'
+import Button from './button/Button'
 import Input from './input'
+import Col from './col'
+import Row from './row'
 
 function install(app) {
-  const components = [Button, Input]
+  const components = [Button, Input, Col, Row]
   components.forEach(item => {
     if (item.install) {
       app.use(item)

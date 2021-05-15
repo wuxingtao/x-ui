@@ -3,7 +3,7 @@
  * @Author: wu xingtao
  * @Date: 2021/3/1
  */
-import { createNamespace } from '@/utils/create'
+import { createNamespace } from '@/utils/create/index_old'
 import { CSSProperties, PropType } from 'vue'
 
 const [createComponent, bem] = createNamespace('input')
