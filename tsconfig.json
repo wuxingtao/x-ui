@@ -16,7 +16,8 @@
     "types": ["webpack-env"],
     "typeRoots": ["./src/typings", "./@types", "./node_modules/@types"],
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@x-ui/*": ["src/packages/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

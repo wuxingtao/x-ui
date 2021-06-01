@@ -3,7 +3,10 @@ import XInput from '@/packages/input/index.tsx'
 export default {
   title: 'XUI/Input',
   component: XInput,
-  argTypes: {}
+  argTypes: {
+    placeholder: '请输入',
+    value: ''
+  }
 }
 
 const Template = args => ({
@@ -17,5 +20,7 @@ const Template = args => ({
 export const Primary = Template.bind({})
 Primary.args = {
   primary: true,
-  label: 'Input'
+  label: 'Input',
+  placeholder: '请输入',
+  value: ''
 }

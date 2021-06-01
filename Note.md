@@ -32,3 +32,18 @@ export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' }
 }
 ```
+
+配置alias
+```js
+    plugins:[
+      [
+        'babel-plugin-module-resolver',
+        {
+          root: ['../src'],
+          alias: {
+            '@x-ui': './src/packages'
+          }
+        }
+      ]
+    ]
+```

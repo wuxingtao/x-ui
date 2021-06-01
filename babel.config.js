@@ -6,5 +6,16 @@ module.exports = {
         useBuiltIns: false
       }
     ]
+  ],
+  plugins: [
+    [
+      'babel-plugin-module-resolver',
+      {
+        root: ['x-ui'],
+        alias: {
+          '@x-ui': 'x-ui/src/packages'
+        }
+      }
+    ]
   ]
 }

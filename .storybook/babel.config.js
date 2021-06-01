@@ -15,6 +15,15 @@ module.exports = {
         },
         styleLibraryName: 'theme-chalk'
       }
+    ],
+    [
+      'babel-plugin-module-resolver',
+      {
+        root: ['../src'],
+        alias: {
+          '@x-ui': './src/packages'
+        }
+      }
     ]
   ]
 }
