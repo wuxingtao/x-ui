@@ -1,5 +1,7 @@
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, Fragment, PropType, createVNode, Teleport } from 'vue'
 import { createNamespace } from '@/utils/create'
+import { renderBlock } from '@x-ui/utils/vnode'
+import renderPopper from '@x-ui/popper/src/renderers/popper'
 
 const [name, bem] = createNamespace('popper')
 
@@ -39,10 +41,11 @@ export default defineComponent({
     function onClick(event: MouseEvent) {
       event.preventDefault()
       const target = event.currentTarget
-      const Rect = target && target.getBoundingClientRect()
+      const Rect = target?.getBoundingClientRect()
       console.log(Rect)
       createPopper(Rect)
     }
+    // TODO：弃用 改为vue vnode渲染
     function createPopper(Rect) {
       const { top, bottom, left, right, height, width } = Rect
       const { content, width: propsWidth } = props
@@ -52,7 +55,7 @@ export default defineComponent({
       popperDom.append(content)
       popperDom.style.cssText = `position:absolute;
       top:${top + height + padding}px;
-      left:${left - (propsWidth - width) / 2}px;
+      left:${left - (Number(propsWidth) - width) / 2}px;
       width:${props.width}px;
       border:1px solid blue;`
       document.body.appendChild(popperDom)
@@ -66,5 +69,21 @@ export default defineComponent({
         </div>
       )
     }
+  },
+  render() {
+    const trigger = 'div'
+    const popper = ''
+    return renderBlock(Fragment, null, [
+      trigger,
+      createVNode(
+        Teleport as any, // Vue did not support createVNode for Teleport
+        {
+          to: 'body'
+        },
+        [popper],
+        PatchFlags.PROPS,
+        ['disabled']
+      )
+    ])
   }
 })

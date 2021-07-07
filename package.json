@@ -11,6 +11,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "babel-plugin-module-resolver": "^4.1.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",

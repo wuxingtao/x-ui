@@ -20,6 +20,8 @@ Vue3+TS+rollup
 > 2. element-plus 使用template渲染
 > 3. setup(){ return () => h('div', [count.value, object.foo]) } 返回一个render函数
 
+> 组件结构参考element-plus + vant
+
 ## storybook
 
 >使用v6版本 支持vue3
