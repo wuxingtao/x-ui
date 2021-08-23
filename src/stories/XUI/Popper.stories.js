@@ -22,12 +22,12 @@ const Template = args => ({
     return { args }
   },
   template:
-    '<x-popper v-bind="args" style="margin-left:200px;"><x-button>按钮测试</x-button></x-popper>'
+    '<x-popper v-bind="args" style="margin-left:200px;"><template #trigger><x-button>按钮测试</x-button></template></x-popper>'
 })
 
 export const Primary = Template.bind({})
 Primary.args = {
   trigger: 'click',
   placeholder: '请输入',
-  content: '内容'
+  content: '这是一段内容'
 }

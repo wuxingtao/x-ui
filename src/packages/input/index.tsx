@@ -68,7 +68,12 @@ export default createComponent({
       const { type, value, disabled, placeholder, readonly } = props
       const classes = [bem([type, disabled, {}])]
       return (
-        <input value={value} placeholder={placeholder} readonly={readonly} />
+        <input
+          class={classes}
+          value={value}
+          placeholder={placeholder}
+          readonly={readonly}
+        />
       )
     }
   }

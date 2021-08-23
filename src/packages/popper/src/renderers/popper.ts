@@ -18,7 +18,7 @@ interface IRenderPopperProps {
   popperClass: string
   popperStyle?: Partial<CSSStyleDeclaration>
   popperId: string
-  popperRef: Ref<HTMLElement>
+  popperRef?: Ref<HTMLElement>
   pure?: boolean
   visibility: boolean,
   onMouseenter: () => void

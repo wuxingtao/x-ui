@@ -55,7 +55,7 @@ export default defineComponent({
       const classes = [bem(size)]
       return (
         <tag className={classes}>
-          <div className="select-trigger">
+          <div class="select-trigger">
             <x-input value={value} type="text" readonly={readonly} />
           </div>
         </tag>

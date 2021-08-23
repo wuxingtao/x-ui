@@ -6,11 +6,12 @@ import {
   renderSlot,
   toDisplayString,
   onMounted,
-  onBeforeUnmount
+  onBeforeUnmount,
+  withDirectives
 } from 'vue'
 import { createNamespace } from '@/utils/create'
 import { PatchFlags, renderBlock } from '@x-ui/utils/vnode'
-import renderPopper from '@x-ui/popper/src/renderers/popper'
+import { renderPopper, renderTrigger } from '@x-ui/popper/src/renderers'
 
 import defaultProps from './use-popper/defaults'
 import usePopper from './use-popper/index'
@@ -33,7 +34,8 @@ export default defineComponent({
   ],
   setup(props, ctx) {
     if (!ctx.slots.trigger) {
-      // throwError(compName, 'Trigger must be provided')
+      // throwError(name, 'Trigger must be provided')
+      throw new Error(name + ': Trigger must be provided')
     }
     const popperStates = usePopper(props, ctx)
     const forceDestroy = () => popperStates.doDestroy(true)
@@ -46,22 +48,38 @@ export default defineComponent({
   render() {
     const {
       $slots,
+      class: kls,
       style,
       effect,
       hide,
+      onPopperMouseEnter,
+      onPopperMouseLeave,
+      onAfterEnter,
+      onAfterLeave,
+      onBeforeEnter,
+      onBeforeLeave,
       popperClass,
       popperId,
       popperStyle,
-      transition
+      transition,
+      visibility,
+      stopPopperMouseEvent
     } = this
-    const trigger = 'div'
     const popper = renderPopper(
       {
         effect,
         name: transition,
         popperClass,
         popperId,
-        popperStyle
+        popperStyle,
+        stopPopperMouseEvent,
+        onMouseenter: onPopperMouseEnter,
+        onMouseleave: onPopperMouseLeave,
+        onAfterEnter,
+        onAfterLeave,
+        onBeforeEnter,
+        onBeforeLeave,
+        visibility
       },
       [
         renderSlot($slots, 'default', {}, () => {
@@ -69,6 +87,19 @@ export default defineComponent({
         })
       ]
     )
+
+    const _t = $slots.trigger?.()
+
+    const triggerProps = {
+      ariaDescribedby: popperId,
+      class: kls,
+      style,
+      ref: 'triggerRef',
+      ...this.events
+    }
+
+    const trigger = withDirectives(renderTrigger(_t, triggerProps), [[hide]])
+
     return renderBlock(Fragment, null, [
       trigger,
       createVNode(
