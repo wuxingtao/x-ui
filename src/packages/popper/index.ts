@@ -9,3 +9,7 @@ const Popper = withInstall<typeof _Popper>(_Popper)
 
 export default Popper
 export { Popper }
+
+export { default as defaultProps, Effect } from './src/use-popper/defaults'
+export type {TriggerType,IPopperOptions,PopperInstance} from './src/use-popper/defaults'
+export * from './src/renderers/index'
