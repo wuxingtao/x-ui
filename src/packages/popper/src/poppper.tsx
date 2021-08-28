@@ -7,6 +7,8 @@ import {
   toDisplayString,
   onMounted,
   onBeforeUnmount,
+  onDeactivated,
+  onActivated,
   withDirectives
 } from 'vue'
 import { createNamespace } from '@/utils/create'
@@ -39,9 +41,10 @@ export default defineComponent({
     }
     const popperStates = usePopper(props, ctx)
     const forceDestroy = () => popperStates.doDestroy(true)
-
     onMounted(popperStates.initializePopper)
     onBeforeUnmount(forceDestroy)
+    onActivated(popperStates.initializePopper)
+    onDeactivated(forceDestroy)
 
     return popperStates
   },

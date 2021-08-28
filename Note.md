@@ -7,8 +7,9 @@ Vue3+TS+rollup
 
 ## 组件按需加载
 
-使用babel-plugin-import 按需引入
+1. 使用babel-plugin-import 按需引入
 样式文件按需从指定组件如：button/index.sccss
+2. 参考element-plus(theme-chalk) 按需引入 theme-default 组件样式
 
 ## 样式
 样式参考element-plus

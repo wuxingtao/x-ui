@@ -5,6 +5,17 @@
  */
 import { toRawType } from '@vue/shared'
 import { Ref } from 'vue'
+import {
+  camelize,
+  capitalize,
+  extend,
+  hasOwn,
+  hyphenate,
+  looseEqual,
+  isString,
+  isObject,
+  isArray
+} from '@vue/shared'
 
 export const isBool = (val: unknown) => typeof val === 'boolean'
 export const isNumber = (val: unknown) => typeof val === 'number'
@@ -22,4 +33,15 @@ export const generateId = (): number => Math.floor(Math.random() * 10000)
  */
 export function $<T>(ref: Ref<T>) {
   return ref.value
+}
+
+export {
+  hasOwn,
+  isArray,
+  isObject,
+  isString,
+  capitalize,
+  camelize,
+  looseEqual,
+  extend
 }

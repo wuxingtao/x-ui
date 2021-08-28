@@ -6,7 +6,7 @@
 import {computed,ref,reactive,watch,CSSProperties} from 'vue'
 import {createPopper} from '@popperjs/core'
 
-import { generateId, isBool, $, isHTMLElement } from "@/utils/util";
+import { generateId, isBool, isArray,$, isHTMLElement } from "@/utils/util";
 import PopupManager from "@/utils/popup-manager";
 
 import usePopperOptions from './popper-options'
@@ -95,7 +95,7 @@ export default function(
   }
 
   const show = ()=>{
-    if(!isManualMode() || props.disabled) return
+    if(isManualMode() || props.disabled) return
     clearTimers()
     if(props.showAfter === 0){
       _show()
@@ -146,6 +146,8 @@ export default function(
     popperInstance = null
   }
 
+  const events = {} as PopperEvents
+
   function update(){
     if(!$(visibility)){
       return
@@ -157,7 +159,81 @@ export default function(
     }
   }
 
-  const events = {} as PopperEvents
+  function onVisibilityChange(toState:boolean){
+    if(toState){
+      popperStyle.value.zIndex = PopupManager.nextZIndex()
+      initializePopper()
+    }
+  }
+
+  if (!isManualMode()) {
+    const toggleState = () => {
+      if ($(visibility)) {
+        hide()
+      } else {
+        show()
+      }
+    }
+
+    const popperEventsHandler = (e: Event) => {
+      e.stopPropagation()
+      switch (e.type) {
+        case 'click': {
+          if (triggerFocused) {
+            // reset previous focus event
+            triggerFocused = false
+          } else {
+            toggleState()
+          }
+          break
+        }
+        case 'mouseenter': {
+          show()
+          break
+        }
+        case 'mouseleave': {
+          hide()
+          break
+        }
+        case 'focus': {
+          triggerFocused = true
+          show()
+          break
+        }
+        case 'blur': {
+          triggerFocused = false
+          hide()
+          break
+        }
+      }
+    }
+
+    const triggerEventsMap: Partial<Record<TriggerType, (keyof PopperEvents)[]>> = {
+      click: ['onClick'],
+      hover: ['onMouseenter', 'onMouseleave'],
+      focus: ['onFocus', 'onBlur'],
+    }
+
+    const mapEvents = (t: TriggerType) => {
+      triggerEventsMap[t].forEach(event => {
+        events[event] = popperEventsHandler
+      })
+    }
+
+    if (isArray(props.trigger)) {
+      Object.values(props.trigger).map(mapEvents)
+    } else {
+      mapEvents(props.trigger as TriggerType)
+    }
+  }
+
+  watch(popperOptions,val=>{
+    if (!popperInstance) return
+    popperInstance.setOptions(val)
+    popperInstance.update()
+  })
+
+  watch(visibility,onVisibilityChange)
 
   return {
     update,

@@ -1,14 +1,15 @@
-import { defineComponent, reactive, toRefs,Teleport,toDisplayString,createCommentVNode,createTextVNode,createVNode,renderSlot } from 'vue'
+import { defineComponent, reactive, toRefs,Fragment,Teleport,toDisplayString,createCommentVNode,createTextVNode,createVNode,renderSlot } from 'vue'
 import { createNamespace } from '@/utils/create'
 import Popover from '@x-ui/popover'
 import {defaultProps,Effect} from "@x-ui/popper";
 import {renderPopper,renderTrigger} from "@x-ui/popper";
 import { renderIf,renderBlock,PatchFlags } from "@x-ui/utils/vnode";
+import usePopover,{SHOW_EVENT,HIDE_EVENT} from "@x-ui/popover/src/usePopover";
 
 import type {PropType} from 'vue'
 import type {TriggerType} from "@x-ui/popper/src/use-popper";
 
-
+const emits = ['update:visible', 'after-enter', 'after-leave', SHOW_EVENT, HIDE_EVENT ]
 const _hoist = { key: 0, class: 'el-popover__title', role: 'title' }
 
 
@@ -37,13 +38,22 @@ export default defineComponent({
       default:true
     }
   },
+  emits,
   setup(props,ctx) {
-    const state: any = reactive({})
-    return { ...toRefs(state) }
+    if (process.env.NODE_ENV !== 'production' && props.visible && !ctx.slots.reference) {
+      // warn(NAME, `
+      //   You cannot init popover without given reference
+      // `)
+      console.log(`${name} You cannot init popover without given reference`)
+    }
+    // @ts-ignore
+    const states = usePopover(props,ctx)
+
+    return states
   },
   render(){
     const {$slots} = this
-    const trigger = $slots.refefrence ? $slots.reference(): null
+    const trigger = $slots.reference ? $slots.reference(): null
     const title = renderIf(this.title,'div',_hoist,toDisplayString(this.title),PatchFlags.TEXT)
 
     const content = renderSlot($slots,'default',{},()=>[createTextVNode(toDisplayString(this.content),PatchFlags.TEXT)])
