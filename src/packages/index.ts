@@ -7,9 +7,10 @@ import Button from './button/Button'
 import Input from './input'
 import Col from './col'
 import Row from './row'
+import Select from './select'
 
 function install(app) {
-  const components = [Button, Input, Col, Row]
+  const components = [Button, Input, Col, Row, Select]
   components.forEach(item => {
     if (item.install) {
       app.use(item)

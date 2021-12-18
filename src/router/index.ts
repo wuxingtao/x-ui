@@ -25,6 +25,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/input',
     name: 'Input',
     component: () => import('../views/Input.vue')
+  },
+  {
+    path: '/select',
+    name: 'Select',
+    component: () => import('../views/Select.vue')
   }
 ]
 
