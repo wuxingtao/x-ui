@@ -30,6 +30,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/select',
     name: 'Select',
     component: () => import('../views/Select.vue')
+  },
+  {
+    path: '/popover',
+    name: 'Popover',
+    component: () => import('../views/Popover.vue')
   }
 ]
 

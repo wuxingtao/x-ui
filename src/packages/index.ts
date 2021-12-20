@@ -8,9 +8,10 @@ import Input from './input'
 import Col from './col'
 import Row from './row'
 import Select from './select'
+import Popover from '@x-ui/popover'
 
 function install(app) {
-  const components = [Button, Input, Col, Row, Select]
+  const components = [Button, Input, Col, Row, Select, Popover]
   components.forEach(item => {
     if (item.install) {
       app.use(item)
