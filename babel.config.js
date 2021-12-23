@@ -11,9 +11,9 @@ module.exports = {
     [
       'babel-plugin-module-resolver',
       {
-        root: ['x-ui'],
+        root: ['.'],
         alias: {
-          '@x-ui': 'x-ui/src/packages'
+          '@x-ui': './src/packages'
         }
       }
     ]

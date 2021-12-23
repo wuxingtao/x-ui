@@ -14,7 +14,8 @@ const alias = {
   '@components': '@/components/',
   '@assets': '@/assets/',
   '@common': '@/common/',
-  '@utils': '@/common/utils/'
+  '@utils': '@/common/utils/',
+  '@x-ui': '@/packages/'
 }
 
 module.exports = {

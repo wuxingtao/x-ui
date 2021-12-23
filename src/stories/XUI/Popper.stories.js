@@ -11,15 +11,14 @@ export default {
         options: ['click', 'focus', 'hover', 'manual']
       }
     },
-    placeholder: '',
     content: ''
   }
 }
 
-const Template = args => ({
+const Template = (args, buttonArgs) => ({
   components: { XPopper, XButton },
   setup() {
-    return { args }
+    return { args, buttonArgs }
   },
   template:
     '<x-popper v-bind="args" style="margin-left:200px;"><template #trigger><x-button>按钮测试</x-button></template></x-popper>'
@@ -28,6 +27,9 @@ const Template = args => ({
 export const Primary = Template.bind({})
 Primary.args = {
   trigger: 'click',
-  placeholder: '请输入',
   content: '这是一段内容'
+}
+
+Primary.buttonArgs = {
+  placeholder: '请输入'
 }

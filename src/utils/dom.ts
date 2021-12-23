@@ -3,6 +3,12 @@
  * @Author: wu xingtao
  * @Date: 2021/7/7
  */
+
+/* istanbul ignore next */
+const trim = function(s: string) {
+  return (s || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
+}
+
 /* istanbul ignore text*/
 export const on = function(
   element: HTMLElement | Document | Window,
@@ -23,6 +29,18 @@ export const off = function(
 ): void {
   if (element && event && handler) {
     element.removeEventListener(event, handler, useCapture)
+  }
+}
+
+/* istanbul ignore next */
+export function hasClass(el: HTMLElement, cls: string): boolean {
+  if (!el || !cls) return false
+  if (cls.indexOf(' ') !== -1)
+    throw new Error('className should not contain space.')
+  if (el.classList) {
+    return el.classList.contains(cls)
+  } else {
+    return (' ' + el.className + ' ').indexOf(' ' + cls + ' ') > -1
   }
 }
 

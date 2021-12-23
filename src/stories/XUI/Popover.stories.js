@@ -11,24 +11,25 @@ export default {
         options: ['click', 'focus', 'hover', 'manual']
       }
     },
-    placeholder: '',
     content: ''
   }
 }
 
-const Template = args => ({
+const Template = (args, buttonArgs) => ({
   components: { XPopover, XButton },
   setup() {
-    return { args }
+    return { args, buttonArgs }
   },
   template:
-    '<x-popover v-bind="args" style="margin-left:200px;"><template #reference><x-button>按钮测试</x-button></template></x-popover>'
+    '<x-popover v-bind="args" style="margin-left:200px;"><template #reference><x-button v-bind="buttonArgs">按钮测试</x-button></template></x-popover>'
 })
 
 export const Primary = Template.bind({})
 Primary.args = {
   trigger: 'click',
-  placeholder: '请输入',
-  content: '这是一段内容',
-  visibility: false
+  content: '这是一段内容'
+  // visibility: false
+}
+Primary.buttonArgs = {
+  placeholder: '请输入'
 }

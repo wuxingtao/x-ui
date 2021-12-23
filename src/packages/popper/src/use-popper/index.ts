@@ -8,8 +8,9 @@ import {createPopper} from '@popperjs/core'
 
 import { generateId, isBool, isArray,$, isHTMLElement } from "@/utils/util";
 import PopupManager from "@/utils/popup-manager";
-
 import usePopperOptions from './popper-options'
+
+import {isString} from "@/utils/util"
 
 import { ComponentPublicInstance,SetupContext,Ref } from 'vue'
 import type {
@@ -123,6 +124,30 @@ export default function(
     if(props.disabled){
       doDestroy(true)
     }
+  }
+
+  function onPopperMouseEnter() {
+    // if trigger is click, user won't be able to close popper when
+    // user tries to move the mouse over popper contents
+    if (props.enterable && props.trigger !== 'click') {
+      clearTimeout(hideTimer)
+    }
+  }
+
+  function onPopperMouseLeave() {
+    const { trigger } = props
+    const shouldPrevent =
+      (isString(trigger) && (trigger === 'click' || trigger === 'focus')) ||
+      // we'd like to test array type trigger here, but the only case we need to cover is trigger === 'click' or
+      // trigger === 'focus', because that when trigger is string
+      // trigger.length === 1 and trigger[0] === 5 chars string is mutually exclusive.
+      // so there will be no need to test if trigger is array type.
+      (trigger.length === 1 &&
+        (trigger[0] === 'click' || trigger[0] === 'focus'))
+
+    if (shouldPrevent) return
+
+    hide()
   }
 
   // 初始化popper
@@ -240,6 +265,8 @@ export default function(
     doDestroy,
     show,
     hide,
+    onPopperMouseEnter,
+    onPopperMouseLeave,
     onAfterEnter: () => {
       emit('after-enter')
     },

@@ -36,7 +36,8 @@ export const parameters = {
 }
 ```
 
-配置alias
+配置alias > .storybook,root 都需要配置babel
+// .storybook/babel.config.js
 ```js
     plugins:[
       [
