@@ -1,11 +1,27 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <template v-if="routerRecord">
+      <router-link
+        v-for="(item, index) in routerRecord"
+        :to="item.path"
+        :key="index"
+        >{{ item.name }}</router-link
+      >
+    </template>
   </div>
   <router-view />
 </template>
-
+<script>
+import { routes } from '@/router'
+import { ref } from 'vue'
+export default {
+  name: 'index',
+  setup() {
+    const routerRecord = ref(routes)
+    return { routerRecord }
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

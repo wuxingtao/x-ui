@@ -41,4 +41,5 @@ export function createBEM(name: string) {
     return `${el}${gen(el, mods)}`
   }
 }
+
 export type BEM = ReturnType<typeof createBEM>

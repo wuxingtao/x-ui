@@ -1,0 +1,47 @@
+@import "../theme-default/common/var.scss";
+@import "../theme-default/mixins/mixins.scss";
+
+@include b(textarea){
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: $--font-size-base;
+  @include e(inner) {
+    display: block;
+    resize: vertical;
+    padding: 5px 15px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: inherit;
+    color: $--input-font-color;
+    background-color: $--input-background-color;
+    background-image: none;
+    border: $--input-border;
+    border-radius: $--input-border-radius;
+    //transition: $--border-transition-base;
+
+    &::placeholder {
+      color: $--input-placeholder-color;
+    }
+
+    &:hover {
+      border-color: $--input-hover-border;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $--input-focus-border;
+    }
+  }
+  & .#{$namespace}-input__count {
+    color: $--color-info;
+    background: $--color-white;
+    position: absolute;
+    font-size: 12px;
+    line-height: 14px;
+    bottom: 5px;
+    right: 10px;
+  }
+}
