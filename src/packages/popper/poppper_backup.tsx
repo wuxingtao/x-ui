@@ -1,7 +1,7 @@
 import { defineComponent, Fragment, PropType, createVNode, Teleport } from 'vue'
 import { createNamespace } from '@/utils/create'
 import { renderBlock } from '@x-ui/utils/vnode'
-import renderPopper from '@x-ui/popper/src/renderers/popper'
+import renderPopper from '@x-ui/popper/src/renderers/popper_old'
 
 const [name, bem] = createNamespace('popper')
 
