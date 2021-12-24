@@ -1,72 +1,63 @@
+import type { PropType } from "vue";
 import {
+  createCommentVNode,
+  createTextVNode,
   defineComponent,
   Fragment,
-  createTextVNode,
-  renderSlot,
-  toDisplayString,
-  createCommentVNode,
-  withDirectives,
-  Teleport,
   h,
-} from 'vue'
+  renderSlot,
+  Teleport,
+  toDisplayString
+} from "vue";
 // import { ClickOutside } from '@element-plus/directives'
-import ElPopper, {
-  // popperDefaultProps,
-  Effect,
-  defaultProps,
-  // renderArrow,
-  renderPopper,
-  renderTrigger,
-} from "@x-ui/popper"
+import ElPopper, { defaultProps, Effect, renderPopper, renderTrigger } from "@x-ui/popper";
 // import { debugWarn } from '@element-plus/utils/error'
-import { renderIf, PatchFlags } from "@x-ui/utils/vnode"
-import usePopover, { SHOW_EVENT, HIDE_EVENT } from './usePopover'
-
-import type { PropType } from 'vue'
+import { PatchFlags, renderIf } from "@x-ui/utils/vnode";
+import usePopover, { HIDE_EVENT, SHOW_EVENT } from "./usePopover";
 import type { TriggerType } from "@x-ui/popper/src/use-popper";
 
 const emits = [
-  'update:visible',
-  'after-enter',
-  'after-leave',
+  "update:visible",
+  "after-enter",
+  "after-leave",
   SHOW_EVENT,
-  HIDE_EVENT,
-]
-const NAME = 'XPopover'
+  HIDE_EVENT
+];
+const NAME = "XPopover";
 
-const _hoist = { key: 0, class: 'el-popover__title', role: 'title' }
+const _hoist = { key: 0, class: "el-popover__title", role: "title" };
 
 export default defineComponent({
   name: NAME,
   components: {
-    ElPopper,
+    ElPopper
   },
   props: {
     // ...popperDefaultProps,
     ...defaultProps,
     content: {
-      type: String,
+      type: String
     },
     trigger: {
       type: String as PropType<TriggerType>,
-      default: 'click',
+      default: "click"
     },
     title: {
-      type: String,
+      type: String
     },
     transition: {
       type: String,
-      default: 'fade-in-linear',
+      default: "fade-in-linear"
     },
     width: {
       type: [String, Number],
-      default: 150,
+      default: 150
     },
     appendToBody: {
       type: Boolean,
-      default: true,
+      default: true
     },
-    tabindex: [String, Number],
+    tabindex: [String, Number]
   },
   emits,
   setup(props, ctx) {
@@ -78,25 +69,25 @@ export default defineComponent({
       // `
       // )
     }
-    const states = usePopover(props, ctx)
+    const states = usePopover(props, ctx);
 
-    return states
+    return states;
   },
   render() {
-    const { $slots } = this
-    const trigger = $slots.reference ? $slots.reference() : null
+    const { $slots } = this;
+    const trigger = $slots.reference ? $slots.reference() : null;
 
     const title = renderIf(
       !!this.title,
-      'div',
+      "div",
       _hoist,
       toDisplayString(this.title),
       PatchFlags.TEXT
-    )
+    );
 
-    const content = renderSlot($slots, 'default', {}, () => [
-      createTextVNode(toDisplayString(this.content), PatchFlags.TEXT),
-    ])
+    const content = renderSlot($slots, "default", {}, () => [
+      createTextVNode(toDisplayString(this.content), PatchFlags.TEXT)
+    ]);
 
     const {
       events,
@@ -110,14 +101,14 @@ export default defineComponent({
       showArrow,
       transition,
       visibility,
-      tabindex,
-    } = this
+      tabindex
+    } = this;
 
     const kls = [
-      this.content ? 'el-popover--plain' : '',
-      'el-popover',
-      popperClass,
-    ].join(' ')
+      this.content ? "el-popover--plain" : "",
+      "el-popover",
+      popperClass
+    ].join(" ");
 
     const popover = renderPopper(
       {
@@ -131,23 +122,22 @@ export default defineComponent({
         onMouseleave: onPopperMouseLeave,
         onAfterEnter,
         onAfterLeave,
-        stopPopperMouseEvent: false,
+        stopPopperMouseEvent: false
       },
-      [title, content,
+      [title, content
         // renderArrow(showArrow)
       ]
-    )
+    );
 
     // when user uses popover directively, trigger will be null so that we only
     // render a popper window for displaying contents
-    const _trigger = trigger
-      ? renderTrigger(trigger, {
+    const _trigger = trigger ? renderTrigger(trigger, {
         ariaDescribedby: popperId,
-        ref: 'triggerRef',
+        ref: "triggerRef",
         tabindex,
-        ...events,
+        ...events
       })
-      : createCommentVNode('v-if', true)
+      : createCommentVNode("v-if", true);
 
     return h(Fragment, null, [
       // this.trigger === 'click'
@@ -158,10 +148,10 @@ export default defineComponent({
         Teleport as any,
         {
           disabled: !this.appendToBody,
-          to: 'body',
+          to: "body"
         },
         [popover]
-      ),
-    ])
-  },
-})
+      )
+    ]);
+  }
+});
